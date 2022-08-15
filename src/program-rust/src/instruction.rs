@@ -20,13 +20,8 @@ impl HelloInstruction {
                     return Err(ProgramError::InvalidInstructionData);
                 }
                 let val: Result<[u8; 4], _> = rest[..4].try_into();
-                match val {
-                    Ok(i) => {
-                        return Ok(HelloInstruction::Set(u32::from_le_bytes(i)))
-                    },
-                    _ => return Err(ProgramError::InvalidInstructionData)
-            }
-    
+              
+                return  HelloInstruction::Set(u32::from_le_bytes(val))?;    
             },
             _ => return Err(ProgramError::InvalidInstructionData)
         }
